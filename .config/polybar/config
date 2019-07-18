@@ -1,0 +1,287 @@
+[colors]
+background = #1a1310
+foreground = #e79c84
+color1 = #ee9970
+color2 = #4476d2
+alert = #bd2c40
+volume-min = #a3be8c
+volume-med = #ebcb8b
+volume-max = #bf616a
+
+[bar/top]
+monitor = ${env:MONITOR:}
+bottom = false
+width = 100%
+height = 22
+fixed-center = true
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 2
+line-color = ${colors.background}
+
+padding-left = 0
+padding-right = 0
+
+module-margin-left = 1
+module-margin-right = 1
+
+font-0 = "Ubuntu Nerd Font:size=10;2"
+font-1 = "Ubuntu Nerd Font:size=16;3"
+font-2 = "Font Awesome 5 Free:style=Regular:pixelsize=8;1"
+font-3 = "Font Awesome 5 Free:style=Solid:pixelsize=8;1"
+font-4 = "Font Awesome 5 Brands:pixelsize=8;1"
+
+modules-left = powermenu i3
+modules-center = date
+modules-right = pulseaudio temperature xkeyboard tray-prefix
+
+tray-position = right
+tray-detached = false
+tray-maxsize = 16
+tray-background = ${colors.color2}
+tray-padding = 4
+
+scroll-up = i3wm-wsnext
+scroll-down = i3wm-wsprev
+
+cursor-click = pointer
+cursor-scroll = pointer
+
+
+[module/xkeyboard]
+type = internal/xkeyboard
+;blacklist-0 = num lock
+
+format =  <label-layout> <label-indicator>
+format-background = ${colors.color1}
+format-foreground = ${colors.background}
+format-prefix = "%{T2}%{T-}"
+format-suffix = "%{T2}%{T-}"
+format-prefix-foreground = ${colors.color1}
+format-prefix-background = ${colors.background}
+format-suffix-foreground = ${colors.background}
+format-suffix-background = ${colors.color1}
+
+label-indicator-padding = 2
+label-indicator-foreground = ${colors.background}
+label-indicator-background = ${colors.color1}
+
+
+[module/date]
+type = internal/date
+interval = 5
+date = "     %b %d     %R     "
+label = "%date%"
+format-background = ${colors.color1}
+format-foreground = ${colors.background}
+format-prefix = "%{T2}%{T-}"
+format-suffix = "%{T2}%{T-}"
+format-prefix-foreground = ${colors.color1}
+format-prefix-background = ${colors.background}
+format-suffix-foreground = ${colors.background}
+format-suffix-background = ${colors.color1}
+
+
+[module/pulseaudio]
+type = internal/pulseaudio
+label-volume =  %percentage%%
+label-muted = ﱝ muted
+format-volume = <label-volume>
+format-volume-background = ${colors.color1}
+format-volume-foreground = ${colors.background}
+format-volume-prefix = "%{T2}%{T-}"
+format-volume-suffix = "%{T2}%{T-}"
+format-volume-prefix-foreground = ${colors.color1}
+format-volume-prefix-background = ${colors.background}
+format-volume-suffix-foreground = ${colors.background}
+format-volume-suffix-background = ${colors.color1}
+format-muted-background = ${colors.color1}
+format-muted-foreground = ${colors.background}
+format-muted-prefix = "%{T2}%{T-}"
+format-muted-suffix = "%{T2}%{T-}"
+format-muted-prefix-foreground = ${colors.color1}
+format-muted-prefix-background = ${colors.background}
+format-muted-suffix-foreground = ${colors.background}
+format-muted-suffix-background = ${colors.color1}
+
+
+[module/temperature]
+type = internal/temperature
+thermal-zone = 0
+warn-temperature = 80
+
+label = %temperature-c%
+label-warn = " %temperature-c%"
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-3 = 
+ramp-4 = 
+
+format = <ramp> <label>
+format-background = ${colors.color2}
+format-foreground = ${colors.background}
+format-prefix = "%{T2}%{T-}"
+format-prefix-foreground = ${colors.color2}
+format-prefix-background = ${colors.background}
+format-suffix = "%{T2}%{T-}"
+format-suffix-foreground = ${colors.background}
+format-suffix-background = ${colors.color2}
+
+format-warn = <label-warn>
+format-warn-background = ${colors.color2}
+format-warn-foreground = ${colors.background}
+format-warn-prefix = "%{T2}%{T-}"
+format-warn-prefix-foreground = ${colors.color2}
+format-warn-prefix-background = ${colors.background}
+format-warn-suffix = "%{T2}%{T-}"
+format-warn-suffix-foreground = ${colors.background}
+format-warn-suffix-background = ${colors.color2}
+
+[module/powermenu]
+type = custom/menu
+
+expand-right = true
+
+format-spacing = 1
+
+label-open = "襤"
+label-close = cancel
+label-separator = |
+format-background = ${colors.color2}
+format-foreground = ${colors.background}
+format-prefix = "  "
+format-prefix-background = ${colors.color2}
+format-suffix = "%{T2}%{T-}"
+format-suffix-foreground = ${colors.background}
+format-suffix-background = ${colors.color2}
+
+menu-0-0 = reboot
+menu-0-0-exec = menu-open-1
+menu-0-1 = power off
+menu-0-1-exec = menu-open-2
+
+menu-1-0 = cancel
+menu-1-0-exec = menu-open-0
+menu-1-1 = reboot
+menu-1-1-exec = systemctl reboot
+
+menu-2-0 = power off
+menu-2-0-exec = systemctl poweroff
+menu-2-1 = cancel
+menu-2-1-exec = menu-open-0
+
+[global/wm]
+margin-top = 5
+margin-bottom = 5
+
+[module/tray-prefix]
+type = custom/text
+content = "%{T2}%{T-}"
+content-font = 0
+content-foreground = ${colors.color2}
+content-background = ${colors.background}
+
+; vim:ft=dosini
+
+################################################################################
+################################################################################
+############                       MODULE I3                        ############
+################################################################################
+################################################################################
+
+[module/i3]
+;https://github.com/jaagr/polybar/wiki/Module:-i3
+type = internal/i3
+
+; Sort the workspaces by index instead of the default
+; sorting that groups the workspaces by output
+; Default: false
+index-sort = true
+
+; Wrap around when reaching the first/last workspace
+; Default: true
+wrapping-scroll = false
+
+; Use fuzzy (partial) matching on labels when assigning
+; icons to workspaces
+; Example: code;♚ will apply the icon to all workspaces
+; containing 'code' in the label
+; Default: false
+fuzzy-match = false
+
+;extra icons to choose from
+;http://fontawesome.io/cheatsheet/
+;       v     
+
+ws-icon-0 = 1;
+ws-icon-1 = 2;
+ws-icon-2 = 3;
+ws-icon-3 = 4;
+ws-icon-4 = 5;
+ws-icon-5 = 6;
+ws-icon-6 = 7;
+ws-icon-7 = 8;
+ws-icon-8 = 9;
+ws-icon-9 = 10;
+
+format = <label-state> <label-mode>
+
+label-mode = %mode%
+label-mode-padding = 2
+label-mode-foreground = #000000
+label-mode-background = #FFBB00
+
+; Available tokens:
+;   %name%
+;   %icon%
+;   %index%
+;   %output%
+; Default: %icon%  %name%
+; focused = Active workspace on focused monitor
+label-focused = %icon% %name%
+label-focused-background = ${colors.color1}
+label-focused-foreground = ${colors.background}
+label-focused-underline = ${colors.background}
+label-focused-padding = 2
+
+; Available tokens:
+;   %name%
+;   %icon%
+;   %index%
+; Default: %icon%  %name%
+; unfocused = Inactive workspace on any monitor
+label-unfocused = %icon% %name%
+label-unfocused-background = ${colors.color1}
+label-unfocused-foreground = ${colors.background}
+label-unfocused-underline = 
+label-unfocused-padding = 2
+
+; visible = Active workspace on unfocused monitor
+label-visible = %icon% %name%
+label-visible-background = ${colors.color1}
+label-visible-foreground = ${colors.background}
+label-visible-underline = 
+label-visible-padding = 2
+
+; Available tokens:
+;   %name%
+;   %icon%
+;   %index%
+; Default: %icon%  %name%
+; urgent = Workspace with urgency hint set
+label-urgent = %icon% %name%
+label-urgent-background = ${self.label-focused-background}
+label-urgent-foreground = ${colors.background}
+label-urgent-padding = 2
+
+format-background = ${colors.color1}
+format-foreground = ${colors.background}
+format-prefix = "%{T2}%{T-}"
+format-prefix-foreground = ${colors.color1}
+format-prefix-background = ${colors.background}
+format-suffix = "%{T2}%{T-}"
+format-suffix-foreground = ${colors.background}
+format-suffix-background = ${colors.color1}
